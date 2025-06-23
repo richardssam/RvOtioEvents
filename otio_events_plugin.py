@@ -74,7 +74,7 @@ class OTIOEventsPlugin(rvtypes.MinorMode):
                 return
         # Create a log file with a date/time filename
         now = datetime.datetime.now()
-        log_filename = now.strftime("otio_events_%Y%m%d_%H%M%S.log")
+        log_filename = now.strftime("otio_events_%Y%m%d_%H%M%S.jsonl")
         self.log_path = os.path.join(self._logging_directory, log_filename)
         self.logging_fh = open(self.log_path, "a")
         print("Logging OTIO events:", self.log_path)
