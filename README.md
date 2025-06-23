@@ -10,10 +10,10 @@ This is highly inspired by the work being done by the ASWF ORI team for review s
 One notable change however, is that we are using https://jsonlines.org/ formatting, so that each line is a separate event. This makes it easy to write out events as they are coming in, and not expect the whole file to be a legal json structure. 
 
 ## Example log file
-See (Log file)[examples/otio_events_20250623_125823.jsonl]
+See [Log file](examples/otio_events_20250623_125823.jsonl)
 
 ## Installing
-Download the (otioevents.zip)[https://github.com/richardssam/RvOtioEvents/raw/refs/heads/main/otioevents.zip] file and install it with the OpenRV/RV  using the packages dialog under preferences.
+Download the [otioevents.zip](https://github.com/richardssam/RvOtioEvents/raw/refs/heads/main/otioevents.zip) file and install it with the OpenRV/RV  using the packages dialog under preferences.
 
 ## Building the package
 THe script
