@@ -1,0 +1,29 @@
+{
+    "OTIO_SCHEMA" : "PluginManifest.1",
+    "schemadefs" : [
+        {
+            "OTIO_SCHEMA" : "SchemaDef.1",
+            "name" : "MediaChange",
+            "execution_scope" : "in process",
+            "filepath" : "schemadefs/MediaChange.py"
+         },
+        {
+            "OTIO_SCHEMA" : "SchemaDef.1",
+            "name" : "NewPresenter",
+            "execution_scope" : "in process",
+            "filepath" : "schemadefs/NewPresenter.py"
+         },
+        {
+            "OTIO_SCHEMA" : "SchemaDef.1",
+            "name" : "Play",
+            "execution_scope" : "in process",
+            "filepath" : "schemadefs/Play.py"
+         },
+        {
+            "OTIO_SCHEMA" : "SchemaDef.1",
+            "name" : "SetCurrentFrame",
+            "execution_scope" : "in process",
+            "filepath" : "schemadefs/SetCurrentFrame.py"
+         }
+    ]
+}

@@ -67,13 +67,13 @@ class MediaChange(otio.core.SerializableObject):
 
     def __str__(self):
         
-        return "NewPresenter({})".format(
-            repr(self.presenter_hash)
+        return "MediaChange({})".format(
+            repr(self.mediaReference)
         )
 
     def __repr__(self):
-        return "otio.schema.NewPresenter(presenter_hash={})".format(
-            repr(self.presenter_hash)
+        return "otio.schema.MediaChange(mediaReference={})".format(
+            repr(self.mediaReference)
         )
     
 
@@ -82,35 +82,50 @@ class Play(otio.core.SerializableObject):
     """A schema for the event system to define when play is enabled.
     timestamp is an ISO 8601 formatted string representing the time of the change.
     This is used to track when media changes occur in the timeline.
+    value is a boolean indicating whether play is enabled or not.
     """
 
     _serializable_label = "play.1"
     _name = "Play"
 
+    timestamp = otio.core.serializable_field(
+        "timestamp",
+        doc="The timestamp of the media change, in ISO 8601 format",
+    )
+
+    value = otio.core.serializable_field(
+        "value",
+        required_type=bool,
+        doc="The value of the play event",
+    )
+
     def __init__(
             self,
+            value,
             timestamp=None # type: Optional[str] = None
     ):
         otio.core.SerializableObject.__init__(self)
-        #if mediaReference is not None and not isinstance(mediaReference, otio.schema.MediaReference):
-        #    raise TypeError("mediaReference must be an otio.schema.MediaReference")
+        if not isinstance(value, bool):
+            raise TypeError("value must be a boolean")
+        self.value = value
         self.timestamp = timestamp if timestamp is not None else datetime.datetime.now().isoformat()
 
 
     def __str__(self):
         
         return "Play({})".format(
-            repr(self.timestamp)
+            repr(self.value)
         )
 
     def __repr__(self):
-        return "otio.schema.Play(timestamp={})".format(
-            repr(self.timestamp)
+        return "otio.schema.Play(value={})".format(
+            repr(self.value)
         )
     
 @otio.core.register_type
 class SetCurrentFrame(otio.core.SerializableObject):
     """A schema for the event system to define when the current frame is set.
+    time is a RationalTime representing the current frame in the timeline.
     timestamp is an ISO 8601 formatted string representing the time of the change.
     This is used to track when the current frame changes occur in the timeline.
     """
@@ -120,23 +135,24 @@ class SetCurrentFrame(otio.core.SerializableObject):
 
     def __init__(
             self,
-            mediaReference=None,
+            time,
             timestamp=None # type: Optional[str] = None
     ):
         otio.core.SerializableObject.__init__(self)
-        #if mediaReference is not None and not isinstance(mediaReference, otio.schema.MediaReference):
-        #    raise TypeError("mediaReference must be an otio.schema.MediaReference")
-        self.mediaReference = mediaReference
+
+        if not isinstance(time, otio.core.RationalTime):
+            raise TypeError("time must be an otio.core.RationalTime")
+        self.time = time
         self.timestamp = timestamp if timestamp is not None else datetime.datetime.now().isoformat()
 
 
     def __str__(self):
         
         return "SetCurrentFrame({})".format(
-            repr(self.timestamp)
+            repr(self.time)
         )
 
     def __repr__(self):
-        return "otio.schema.SetCurrentFrame(timestamp={})".format(
-            repr(self.timestamp)
+        return "otio.schema.SetCurrentFrame(time={})".format(
+            repr(self.time)
         )
