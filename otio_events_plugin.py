@@ -121,14 +121,12 @@ class OTIOEventsPlugin(rvtypes.MinorMode):
                 return
             current_source_path = info.get("file", current_source)
             if current_source_path != self.last_source:
-                print("Switched to new clip:", current_source_path, current_source, commands.nodeType(current_source))
                 nodeGroup = commands.nodeGroup(current_source)
                 if nodeGroup is None:
                     print("No node group found for source node:", current_source)
                     return
                 active_source = get_source_node(nodeGroup)
                 media_ref = _create_media_reference(nodeGroup, active_source)
-                print("Media reference created:", media_ref)
                 media_change = MediaChange(mediaReference=media_ref)
                 s = otio.adapters.write_to_string(media_change, adapter_name="otio_json", indent=-1)
                 if self.logging_fh is not None:
