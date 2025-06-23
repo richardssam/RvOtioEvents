@@ -1,7 +1,7 @@
 # RvOtioEvents
 
 Currently this is a plugin for RV which logs what media is being viewed at what time.
-Down the road we could have it record other events so that we could play back the events and re-create a session. We are deliberatey using a neutral format, using OTIO as a serializer, so that similar plugins could be written for other playback tools.
+Down the road we could have it record other events so that we could play back the events and re-create a session. We are deliberately using a neutral format, using OTIO as a serializer, so that similar plugins could be written for other playback tools.
 
 The hope is that this is also useful for machine learning to identify what the viewer is looking at.
 
