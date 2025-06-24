@@ -14,6 +14,11 @@ modes:
     event: ''
     load: immediate
 
+directory: 
+  - folder: otio_event_plugin
+    location: Python
+    description: 'OTIO Plugin'
+
 
 description: |
     <p>

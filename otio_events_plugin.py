@@ -26,7 +26,7 @@ from rv import rvtypes
 import opentimelineio as otio
 
 from otio_writer import get_source_node, create_timeline_from_node, _create_media_reference
-from EventSchemaDef import *
+otio.schema.schemadef.module_from_name('SyncEvent')
 
 class Mode(object):
     sleeping = 1
@@ -91,6 +91,9 @@ class OTIOEventsPlugin(rvtypes.MinorMode):
         self.init(
             "otioevents",
             [
+                ("graph-state-change", self.on_event, "Catch all events"),
+                ("mark-frame", self.on_event, "Mark Frame"),
+                ("unmark-frame", self.on_event, "Mark Frame"),
                 ("frame-changed", self.on_frame_changed, "Detect clip switch")
             ],
             None,
@@ -106,6 +109,10 @@ class OTIOEventsPlugin(rvtypes.MinorMode):
 
         self.setup_logging()
 
+    def on_event(self, event):
+        # Handle the event
+        event.reject()
+        print("Event occurred:", event.name(), "with sender:(", event.sender(), ")", event.contents()) 
 
     def on_frame_changed(self, event):
         # Get the current source node for the current frame
@@ -127,7 +134,7 @@ class OTIOEventsPlugin(rvtypes.MinorMode):
                     return
                 active_source = get_source_node(nodeGroup)
                 media_ref = _create_media_reference(nodeGroup, active_source)
-                media_change = MediaChange(mediaReference=media_ref)
+                media_change = otio.schemadef.SyncEvent.MediaChange(mediaReference=media_ref)
                 s = otio.adapters.write_to_string(media_change, adapter_name="otio_json", indent=-1)
                 if self.logging_fh is not None:
                     print(s, file=self.logging_fh)
@@ -148,7 +155,7 @@ def createMode():
     if manifest_path:
         manifest_path += os.pathsep
     os.environ["OTIO_PLUGIN_MANIFEST_PATH"] = manifest_path + os.path.join(
-        support_files_path, "manifest.json"
+        support_files_path, "plugin_manifest.json"
     )
     sys.path.append(support_files_path)
 
