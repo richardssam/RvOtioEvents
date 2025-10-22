@@ -26,7 +26,7 @@ from rv import rvtypes
 import opentimelineio as otio
 
 from otio_writer import get_source_node, create_timeline_from_node, _create_media_reference
-otio.schema.schemadef.module_from_name('SyncEvent')
+
 
 class Mode(object):
     sleeping = 1
@@ -82,6 +82,7 @@ class OTIOEventsPlugin(rvtypes.MinorMode):
     def __init__(self):
         print("IN EVENTS PLUGIN")
         super(OTIOEventsPlugin, self).__init__()
+        otio.schema.schemadef.module_from_name('SyncEvent')
 
         self.last_source = None
         self.logging_fh = None
@@ -146,7 +147,7 @@ class OTIOEventsPlugin(rvtypes.MinorMode):
 
 def createMode():
     support_files_path = os.path.join(
-        os.path.dirname(os.path.realpath(__file__)), "..", "SupportFiles", "otio_reader"
+        os.path.dirname(os.path.realpath(__file__)), "..", "Python/otio_event_plugin"
     )
     #print("About to run:", otio_mu)
     #commands.eval(otio_mu)
@@ -157,6 +158,7 @@ def createMode():
     os.environ["OTIO_PLUGIN_MANIFEST_PATH"] = manifest_path + os.path.join(
         support_files_path, "plugin_manifest.json"
     )
+    print("MANIFEST PATH:", os.environ["OTIO_PLUGIN_MANIFEST_PATH"])
     sys.path.append(support_files_path)
 
     return OTIOEventsPlugin()

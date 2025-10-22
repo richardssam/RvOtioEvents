@@ -9,15 +9,15 @@ optional: true
 
 modes: 
   - file: otio_events_plugin.py
-    menu: 'Tools/PyConsole'
+    menu: ''
     shortcut: ''
     event: ''
     load: immediate
 
-directory: 
+folders: 
   - folder: otio_event_plugin
     location: Python
-    description: 'OTIO Plugin'
+    description: 'OTIO Event Plugin'
 
 
 description: |

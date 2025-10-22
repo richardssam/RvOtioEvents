@@ -1,3 +1,3 @@
 #!/bin/bash
 
-zip otioevents.zip otio_events_plugin.py EventSchemaDef.py PACKAGE 
+zip -r otioevents.zip otio_events_plugin.py otio_event_plugin EventSchemaDef.py PACKAGE 
